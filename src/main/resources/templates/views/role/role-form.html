@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{index :: layout(${role.id == null} ? #{roles.new} : #{roles.edit}, ~{::main})}">
+<body><main class="form-page">
+<div class="form-card"><h1 th:text="${role.id == null} ? #{roles.new} : #{roles.edit}">Rol</h1>
+<form method="post" novalidate th:object="${role}" th:action="${role.id == null} ? @{/roles/insert} : @{/roles/update}">
+<input type="hidden" th:field="*{id}">
+<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}"><ul class="mb-0"><li th:each="error : ${#fields.allErrors()}" th:text="${error}"></li></ul></div>
+<div class="mb-3"><label for="name" class="form-label" th:text="#{role.name}">Nombre</label><input class="form-control" th:errorclass="is-invalid" id="name" th:field="*{name}" maxlength="50" required><div class="invalid-feedback" th:errors="*{name}"></div></div>
+<p class="text-muted small" th:text="#{role.assignmentHelp}"></p>
+<button class="btn btn-primary" th:text="${role.id == null} ? #{common.create} : #{common.save}">Guardar</button>
+<a class="btn btn-secondary" th:href="@{/roles}" th:text="#{common.back}">Volver</a>
+</form></div>
+</main></body></html>

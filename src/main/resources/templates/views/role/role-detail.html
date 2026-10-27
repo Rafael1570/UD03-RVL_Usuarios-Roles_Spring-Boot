@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{index :: layout(#{roles.detail}, ~{::main})}">
+<body><main class="list-page">
+<div class="list-card"><h1 th:text="#{roles.detail}">Detalle de rol</h1>
+<table class="table table-bordered"><tbody><tr><th th:text="#{common.id}">ID</th><td th:text="${role.id}"></td></tr><tr><th th:text="#{role.name}">Nombre</th><td th:text="${role.name}"></td></tr></tbody></table>
+<p class="text-muted" th:text="#{role.assignmentHelp}"></p>
+<a class="btn btn-primary" th:href="@{/roles/edit(id=${role.id})}" th:text="#{common.edit}">Editar</a><a class="btn btn-secondary" th:href="@{/roles}" th:text="#{common.back}">Volver</a>
+</div>
+</main></body></html>

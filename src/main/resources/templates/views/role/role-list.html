@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{index :: layout(#{roles.title}, ~{::main})}">
+<body><main class="list-page">
+<div class="list-card"><h1 th:text="#{roles.title}">Roles</h1>
+<a class="btn btn-success" th:href="@{/roles/new}" th:text="#{roles.new}">Nuevo rol</a>
+<div th:if="${successMessage}" class="alert alert-success" role="status" th:text="${successMessage}"></div>
+<div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+<div class="table-responsive"><table class="table table-striped table-bordered"><thead><tr><th th:text="#{common.id}">ID</th><th th:text="#{role.name}">Nombre</th><th th:text="#{common.actions}">Acciones</th></tr></thead>
+<tbody><tr th:each="role : ${roles}"><td th:text="${role.id}"></td><td th:text="${role.name}"></td><td>
+<a class="btn btn-secondary btn-sm" th:href="@{/roles/detail(id=${role.id})}" th:text="#{common.detail}">Detalle</a>
+<a class="btn btn-primary btn-sm" th:href="@{/roles/edit(id=${role.id})}" th:text="#{common.edit}">Editar</a>
+<form class="d-inline" method="post" th:action="@{/roles/delete}" th:data-confirm="#{roles.confirmDelete}"><input type="hidden" name="id" th:value="${role.id}"><button class="btn btn-danger btn-sm" th:text="#{common.delete}">Eliminar</button></form>
+</td></tr><tr th:if="${#lists.isEmpty(roles)}"><td colspan="3" th:text="#{common.empty}">Sin datos.</td></tr></tbody></table></div>
+<p class="text-muted" th:text="#{role.assignmentHelp}"></p><a class="btn btn-secondary" th:href="@{/}" th:text="#{nav.home}">Inicio</a></div>
+</main></body></html>

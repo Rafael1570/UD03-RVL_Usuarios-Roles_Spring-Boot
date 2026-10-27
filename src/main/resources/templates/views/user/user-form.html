@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{index :: layout(${userForm.id == null} ? #{users.new} : #{users.edit}, ~{::main})}">
+<body><main class="form-page">
+<div class="form-card">
+<h1 th:text="${userForm.id == null} ? #{users.new} : #{users.edit}">Usuario</h1>
+<form method="post" novalidate th:object="${userForm}" th:action="${userForm.id == null} ? @{/users/insert} : @{/users/update}">
+<input type="hidden" th:field="*{id}">
+<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}"><ul class="mb-0"><li th:each="error : ${#fields.allErrors()}" th:text="${error}"></li></ul></div><div class="mb-3"><label for="username" class="form-label" th:text="#{user.username}"></label><input class="form-control" th:errorclass="is-invalid" id="username" type="text" th:field="*{username}" maxlength="40" autocomplete="off" required><div class="invalid-feedback" th:errors="*{username}"></div></div>
+<div class="mb-3"><label for="password" class="form-label" th:text="#{user.password}">Contraseña</label>
+<input class="form-control" th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'" type="password" id="password" name="password" maxlength="72" autocomplete="new-password" th:attr="required=${userForm.id == null}">
+<div class="invalid-feedback" th:errors="*{password}"></div><small class="text-muted" th:text="${userForm.id == null} ? #{user.passwordHelp} : #{user.passwordEditHelp}"></small></div>
+<div class="mb-3"><label for="lastPasswordChange" class="form-label" th:text="#{user.lastPasswordChange}"></label><input class="form-control" th:errorclass="is-invalid" id="lastPasswordChange" type="datetime-local" th:field="*{lastPasswordChange}" required><div class="invalid-feedback" th:errors="*{lastPasswordChange}"></div></div>
+<div class="mb-3"><label for="failedLoginAttempts" class="form-label" th:text="#{user.failedLoginAttempts}"></label><input class="form-control" th:errorclass="is-invalid" id="failedLoginAttempts" type="number" th:field="*{failedLoginAttempts}" min="0" step="1" required><div class="invalid-feedback" th:errors="*{failedLoginAttempts}"></div></div>
+<small class="d-block text-muted mb-3" th:text="#{user.expirationHelp}"></small>
+<div class="form-check text-start mb-2"><input class="form-check-input" type="checkbox" th:field="*{active}"><label class="form-check-label" for="active" th:text="#{user.active}"></label></div>
+<div class="form-check text-start mb-2"><input class="form-check-input" type="checkbox" th:field="*{accountNonLocked}"><label class="form-check-label" for="accountNonLocked" th:text="#{user.accountNonLocked}"></label></div>
+<div class="form-check text-start mb-2"><input class="form-check-input" type="checkbox" th:field="*{emailVerified}"><label class="form-check-label" for="emailVerified" th:text="#{user.emailVerified}"></label></div>
+<div class="form-check text-start mb-2"><input class="form-check-input" type="checkbox" th:field="*{mustChangePassword}"><label class="form-check-label" for="mustChangePassword" th:text="#{user.mustChangePassword}"></label></div>
+
+<fieldset class="mt-4 mb-4 text-start"><legend class="form-label fs-6" th:text="#{user.roles}">Roles</legend>
+<p class="text-muted small" th:text="#{user.rolesHelp}"></p>
+<div th:if="${#lists.isEmpty(availableRoles)}" class="alert alert-warning"><span th:text="#{user.noRoles}"></span> <a th:href="@{/roles/new}" th:text="#{roles.new}"></a></div>
+<div class="form-check" th:each="role : ${availableRoles}"><label class="form-check-label"><input class="form-check-input" type="checkbox" th:field="*{roleIds}" th:value="${role.id}"> <span th:text="${role.name}"></span></label></div>
+<div class="invalid-feedback d-block" th:if="${#fields.hasErrors('roleIds')}" th:errors="*{roleIds}"></div>
+</fieldset>
+<button class="btn btn-primary" type="submit" th:disabled="${#lists.isEmpty(availableRoles)}" th:text="${userForm.id == null} ? #{common.create} : #{common.save}">Guardar</button>
+<a class="btn btn-secondary" th:href="@{/users}" th:text="#{common.back}">Volver</a>
+</form></div>
+</main></body></html>

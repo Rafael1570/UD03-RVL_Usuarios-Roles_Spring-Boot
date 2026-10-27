@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{index :: layout(#{app.name}, ~{::main})}">
+<body><main class="position-relative bg-light p-0">
+<div class="position-relative bg-light w-100" style="height: 100vh;">
+<div class="position-absolute top-50 start-50 translate-middle text-center">
+<h1 class="display-4 fw-bold" th:text="#{app.name}">Usuarios y roles</h1>
+<p class="lead text-muted"><strong>Rafael Vega Librero</strong> - <span th:text="#{home.description}">Gestión de usuarios y roles.</span></p>
+</div></div>
+</main></body></html>

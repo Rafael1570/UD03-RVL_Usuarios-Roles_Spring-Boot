@@ -1,0 +1,5 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{index :: layout(#{error.title}, ~{::main})}">
+<body><main class="list-page">
+<div class="list-card"><h1 th:text="#{error.title}"></h1><p class="alert alert-danger" th:text="#{error.database}"></p><a class="btn btn-secondary" th:href="@{/}" th:text="#{nav.home}"></a></div>
+</main></body></html>

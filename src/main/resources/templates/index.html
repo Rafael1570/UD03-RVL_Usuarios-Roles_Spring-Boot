@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(pageTitle, pageContent)">
+<head th:replace="~{fragments/head :: head(${pageTitle})}"></head>
+<body class="d-flex flex-column h-100">
+<div class="content-wrapper">
+  <header th:replace="~{fragments/header :: header}"></header>
+  <th:block th:replace="${pageContent}"></th:block>
+</div>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<th:block th:replace="~{fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

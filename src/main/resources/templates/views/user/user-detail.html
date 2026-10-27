@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{index :: layout(#{users.detail}, ~{::main})}">
+<body><main class="list-page">
+<div class="list-card"><h1 th:text="#{users.detail}">Detalle de usuario</h1>
+<table class="table table-bordered"><tbody><tr><th th:text="#{common.id}"></th><td th:text="${user.id}"></td></tr>
+<tr><th th:text="#{user.username}"></th><td th:text="${user.username}"></td></tr>
+<tr><th th:text="#{user.lastPasswordChange}"></th><td th:text="${#temporals.format(user.lastPasswordChange, 'dd/MM/yyyy HH:mm')}"></td></tr>
+<tr><th th:text="#{user.passwordExpiresAt}"></th><td th:text="${#temporals.format(user.passwordExpiresAt, 'dd/MM/yyyy HH:mm')}"></td></tr>
+<tr><th th:text="#{user.failedLoginAttempts}"></th><td th:text="${user.failedLoginAttempts}"></td></tr>
+<tr><th th:text="#{user.active}"></th><td th:text="${user.active} ? #{common.yes} : #{common.no}"></td></tr>
+<tr><th th:text="#{user.accountNonLocked}"></th><td th:text="${user.accountNonLocked} ? #{common.yes} : #{common.no}"></td></tr>
+<tr><th th:text="#{user.emailVerified}"></th><td th:text="${user.emailVerified} ? #{common.yes} : #{common.no}"></td></tr>
+<tr><th th:text="#{user.mustChangePassword}"></th><td th:text="${user.mustChangePassword} ? #{common.yes} : #{common.no}"></td></tr>
+<tr><th th:text="#{user.roles}">Roles</th><td><span th:each="role, state : ${user.roles}" th:text="${role.name + (state.last ? '' : ', ')}"></span></td></tr></tbody></table>
+<a class="btn btn-primary" th:href="@{/users/edit(id=${user.id})}" th:text="#{common.edit}">Editar</a>
+<a class="btn btn-secondary" th:href="@{/users}" th:text="#{common.back}">Volver</a></div>
+</main></body></html>

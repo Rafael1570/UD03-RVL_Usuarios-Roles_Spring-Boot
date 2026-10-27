@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{index :: layout(#{users.title}, ~{::main})}">
+<body><main class="list-page">
+<div class="list-card">
+<h1 th:text="#{users.title}">Usuarios</h1>
+<a class="btn btn-success" th:href="@{/users/new}" th:text="#{users.new}">Nuevo usuario</a>
+<div th:if="${successMessage}" class="alert alert-success" role="status" th:text="${successMessage}"></div>
+<div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+<div class="table-responsive"><table class="table table-striped table-bordered">
+<thead><tr><th th:text="#{common.id}">ID</th><th th:text="#{user.username}">Usuario</th><th th:text="#{user.active}">Activo</th><th th:text="#{user.roles}">Roles</th><th th:text="#{common.actions}">Acciones</th></tr></thead>
+<tbody><tr th:each="user : ${users}">
+<td th:text="${user.id}"></td><td th:text="${user.username}"></td><td th:text="${user.active} ? #{common.yes} : #{common.no}"></td>
+<td><span th:each="role, state : ${user.roles}" th:text="${role.name + (state.last ? '' : ', ')}"></span></td>
+<td><a class="btn btn-secondary btn-sm" th:href="@{/users/detail(id=${user.id})}" th:text="#{common.detail}">Detalle</a>
+<a class="btn btn-primary btn-sm" th:href="@{/users/edit(id=${user.id})}" th:text="#{common.edit}">Editar</a>
+<form class="d-inline" method="post" th:action="@{/users/delete}" th:data-confirm="#{users.confirmDelete}"><input type="hidden" name="id" th:value="${user.id}"><button class="btn btn-danger btn-sm" th:text="#{common.delete}">Eliminar</button></form></td>
+</tr><tr th:if="${#lists.isEmpty(users)}"><td colspan="5" th:text="#{common.empty}">Sin datos.</td></tr></tbody>
+</table></div><a class="btn btn-secondary" th:href="@{/}" th:text="#{nav.home}">Inicio</a>
+</div>
+</main></body></html>
