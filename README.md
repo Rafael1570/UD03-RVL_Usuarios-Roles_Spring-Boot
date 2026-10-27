@@ -10,7 +10,7 @@ Abre esta carpeta o su `pom.xml` como proyecto Maven. Selecciona **JDK 21**, esp
 
 La aplicación utiliza una base de datos independiente: **users-roles-rvl**, MariaDB en **localhost:3311** y la web en **http://localhost:8081**.
 
-La carpeta ya incluye un `.env` local con credenciales generadas, excluido de Git. Si falta ese archivo, copia `.env.example` a `.env` y completa las contraseñas.
+Antes del primer arranque, copia `.env.example` a `.env` y completa `DB_PASSWORD` y `DB_ROOT_PASSWORD`. El archivo `.env` queda excluido de Git; el repositorio solo contiene la plantilla de configuración.
 
 1. Arranca Docker Desktop o el servicio Docker de tu equipo.
 2. Desde la raíz del proyecto ejecuta:

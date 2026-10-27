@@ -1,5 +1,7 @@
 /target/
 .env
+.env.*
+!.env.example
 .idea/workspace.xml
 .idea/shelf/
 *.iml
